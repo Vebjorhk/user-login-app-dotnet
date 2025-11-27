@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Api.Models;
+namespace Api.Data;
 
 [Table("app_user")]
 public class AppUser

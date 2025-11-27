@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Api.Models; // adjust namespace if needed
 
 namespace Api.Data;
 
