@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Cookie Test</title>
+  </head>
+  <body>
+    <h1>Cookie Test</h1>
+
+    <button onclick="getTest()">GET /test (with credentials)</button>
+    <button onclick="postTest()">POST /test (with credentials)</button>
+    <button onClick="getCookies()">List cookies</button>
+    <a href="http://localhost:5064/test">Lenke trykk her</a>
+    <form action="http://localhost:5064/test" method="post">
+        <input type="submit" value="something">
+    </form>
+
+    <script>
+        
+
+      const API = "http://localhost:5064"; // adjust port if needed
+
+      function log(...args) {
+        document.getElementById("output").textContent += args.join(" ") + "\n";
+      }
+
+        function getCookies() {
+            console.log(document.cookie);
+        }
+
+
+      async function getTest() {
+
+        const res = await fetch(API + "/test", {
+          method: "GET",
+          credentials: "include", // <-- important
+        });
+
+        const data = await res.json();
+        log("GET /test =>", JSON.stringify(data));
+      }
+
+      async function postTest() {
+        const res = await fetch(API + "/test", {
+          method: "POST",
+          mode: "no-cors",
+          credentials: "include", // <-- important
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ dummy: 1 }),
+        });
+
+        const data = await res.json();
+        log("POST /test =>", JSON.stringify(data));
+      }
+    </script>
+  </body>
+</html>
