@@ -2,11 +2,12 @@ namespace Api.Auth;
 
 public static class AuthEndpoints
 {
-    public static void MapAuthEndpoints(this IEndpointRouteBuilder app)
+    public static RouteGroupBuilder MapAuthEndpoints(this IEndpointRouteBuilder app)
     {
         var auth = app.MapGroup("/auth").WithTags("Auth");
 
         auth.MapPost("/login", Login);
+        return auth;
     }
 
     private static IResult Login(LoginRequest req)
@@ -28,6 +29,6 @@ public static class AuthEndpoints
             );
         }
 
-        return Results.Ok(new { username = req.Username });
+        return Results.Ok(new LoginResponse(req.Username));
     }
 }

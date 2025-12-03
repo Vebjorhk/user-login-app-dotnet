@@ -25,6 +25,30 @@ app.UseHttpsRedirection();
 
 app.MapGet("/", () => "API is running");
 
+app.MapGet("/test", (HttpRequest request) =>
+{
+    var cookies = string.Join("; ", request.Cookies.Select(kvp => $"{kvp.Key}={kvp.Value}"));
+    Console.WriteLine($"[GET /test] Cookies received: {cookies}");
+
+    return Results.Ok(new
+    {
+        method = "GET",
+        cookies = request.Cookies
+    });
+});
+
+app.MapPost("/test", (HttpRequest request) =>
+{
+    var cookies = string.Join("; ", request.Cookies.Select(kvp => $"{kvp.Key}={kvp.Value}"));
+    Console.WriteLine($"[POST /test] Cookies received: {cookies}");
+
+    return Results.Ok(new
+    {
+        method = "POST",
+        cookies = request.Cookies
+    });
+});
+
 app.MapGet("/db-test", async (AppDbContext db) =>
 {
     var canConnect = await db.Database.CanConnectAsync();
