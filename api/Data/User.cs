@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Api.Data;
 
 [Table("app_user")]
-public class AppUser
+public class User
 {
     [Key]
     [Column("id")]

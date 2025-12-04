@@ -6,5 +6,6 @@ public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-    public DbSet<AppUser> Users => Set<AppUser>();
+    public DbSet<User> Users => Set<User>();
+    public DbSet<Session> Sessions { get; set; } = null!;
 }
